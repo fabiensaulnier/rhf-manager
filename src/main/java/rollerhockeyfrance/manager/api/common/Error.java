@@ -1,27 +1,34 @@
-package rollerhockeyfrance.manager.api;
+package rollerhockeyfrance.manager.api.common;
 
-import java.util.List;
+import lombok.Data;
+
+import org.eclipse.jetty.http.HttpStatus;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import lombok.Data;
 
 @Data
 @JsonInclude(Include.NON_NULL)
 public class Error {
 
 	@JsonProperty
-	private String code;
+	private String id;
 	
 	@JsonProperty
-	private String message;
+	private HttpStatus status;
 	
 	@JsonProperty
-	private String field; 
+	private Code code;
 	
 	@JsonProperty
-	private List<Error> errors;
+	private String title;
+	
+	@JsonProperty
+	private String detail;
+		
+    public enum Code {
+        NOT_FOUND
+    }
 
 }

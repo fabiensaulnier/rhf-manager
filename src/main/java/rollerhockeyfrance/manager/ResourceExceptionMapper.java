@@ -13,7 +13,7 @@ import javax.ws.rs.ext.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import rollerhockeyfrance.manager.api.Error;
+import rollerhockeyfrance.manager.api.common.Error;
 
 @Provider
 public class ResourceExceptionMapper implements ExceptionMapper<Throwable> {
@@ -47,8 +47,8 @@ public class ResourceExceptionMapper implements ExceptionMapper<Throwable> {
    
     private Error getJsonError(Throwable exception) {
     	Error error = new Error();
-    	error.setCode(ID.toString());
-    	error.setMessage(exception.getLocalizedMessage());
+    	//error.setCode(ID.toString());
+    	//error.setMessage(exception.getLocalizedMessage());
     	return error;
     }
 
