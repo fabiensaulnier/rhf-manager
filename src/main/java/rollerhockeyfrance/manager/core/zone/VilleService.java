@@ -2,6 +2,7 @@ package rollerhockeyfrance.manager.core.zone;
 
 import java.util.List;
 
+import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.yammer.dropwizard.hibernate.UnitOfWork;
 
@@ -23,11 +24,9 @@ public class VilleService {
     
     @UnitOfWork
     public ZoneVille create(ZoneVille ville) {
-        
-        Coordonnes coordonnes = googleMapsService.getCoordonnees(ville);
-        ville.setLatitude(coordonnes.getLatitude());
-        ville.setLongitude(coordonnes.getLontitude());
-        
+        Optional<Coordonnes> coordonnes = Optional.fromNullable(googleMapsService.getCoordonnees(ville));
+        ville.setLatitude(coordonnes.orNull().getLatitude());
+        ville.setLongitude(coordonnes.orNull().getLontitude());
         return villeDAO.create(ville); 
     }
     

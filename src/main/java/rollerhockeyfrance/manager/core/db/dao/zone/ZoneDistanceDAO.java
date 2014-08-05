@@ -23,6 +23,7 @@ public class ZoneDistanceDAO extends AbstractDAO<ZoneDistance, Long> {
 	public ZoneDistanceDAO(SessionFactory sessionFactory) {
 		super(sessionFactory);
 	}
+	
 
 
 	

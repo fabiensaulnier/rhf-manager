@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
 import lombok.Data;
 
@@ -34,6 +35,7 @@ public abstract class AbstractEntity {
 	@Column
 	private DateTime created;
 	
+	@Version
 	@JsonProperty
 	@Column
 	private DateTime updated;

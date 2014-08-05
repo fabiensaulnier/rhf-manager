@@ -3,7 +3,6 @@ package rollerhockeyfrance.manager;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -15,6 +14,14 @@ import org.slf4j.LoggerFactory;
 
 import rollerhockeyfrance.manager.api.Error;
 
+/**
+ * Classe permettant de réécrire les erreurs 
+ * pour avoir une réponse au format JSON interprétable par
+ * l'UI.
+ * 
+ * @author fabiensaulnier
+ *
+ */
 @Provider
 public class ResourceExceptionMapper implements ExceptionMapper<Throwable> {
 
@@ -24,28 +31,26 @@ public class ResourceExceptionMapper implements ExceptionMapper<Throwable> {
     @Context
     private HttpServletRequest request;
     
+    /*
+     * (non-Javadoc)
+     * @see javax.ws.rs.ext.ExceptionMapper#toResponse(java.lang.Throwable)
+     */
     public Response toResponse(Throwable exception) {
-
-        logException(ID, exception);
-
-        if (exception instanceof WebApplicationException) {
-            logger.warn("erreur applicative",exception);
-            return ((WebApplicationException) exception).getResponse();
-        } else {
-            return Response.serverError()
-                   .type(MediaType.APPLICATION_JSON)
-                   .entity(this.getJsonError(exception))
-                   .build();
-        }
-    }
-
-
-    protected void logException(long id, Throwable exception) {
-        String msg = String.format("Error handling a request: %016x", id);
+        String msg = String.format("Error handling a request: %016x", ID);
         logger.error(msg, exception);
+        return Response.serverError()
+               .type(MediaType.APPLICATION_JSON)
+               .entity(this.getJsonError(exception))
+               .build();
     }
    
-    private Error getJsonError(Throwable exception) {
+    /**
+     * Build JSON error
+     * 
+     * @param exception
+     * @return
+     */
+    protected Error getJsonError(Throwable exception) {
     	Error error = new Error();
     	error.setCode(ID.toString());
     	error.setMessage(exception.getLocalizedMessage());

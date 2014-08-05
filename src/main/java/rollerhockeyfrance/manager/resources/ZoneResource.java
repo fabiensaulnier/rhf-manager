@@ -32,8 +32,7 @@ import com.yammer.metrics.annotation.Timed;
 
 @Singleton
 @Path("/zone")
-@Produces("application/json; charset=utf-8")
-@Consumes("application/json; charset=utf-8")
+@Produces(MediaType.APPLICATION_JSON)
 public class ZoneResource {
 	
 	private final VilleService villeService;
@@ -57,7 +56,7 @@ public class ZoneResource {
 	public Response exportPDF(@PathParam(value = "id") IntParam id) {
 		
 		String filename = "export-zone-" + id + "-" + DateTime.now() +".pdf";
-			
+		
 		File file = null;
 		ResponseBuilder response = Response.ok((Object) file);
 		response.header("Content-Disposition", "attachment; filename=" + filename);
@@ -81,9 +80,9 @@ public class ZoneResource {
 	
 	// VILLES
 
-	@UnitOfWork
 	@POST
 	@Path("/villes")
+	@Consumes("application/json; charset=utf-8")
 	public Response createVille(@Validated ZoneVille ville) {
 		ZoneVille villeCreated = villeService.create(ville);
 		return Response.created(UriBuilder.fromResource(ZoneResource.class)
@@ -91,7 +90,6 @@ public class ZoneResource {
 					   .build();
 	}
 	
-	@UnitOfWork
 	@GET
 	@Path("/villes/{id}")
 	public Response readVille(@PathParam(value = "id") LongParam id) {
@@ -111,7 +109,6 @@ public class ZoneResource {
 		return Response.ok(villes).build();
 	}
 	
-	@UnitOfWork
 	@PUT
 	@Path("/villes")
 	public Response updateVille(@Validated ZoneVille ville) {
@@ -122,7 +119,6 @@ public class ZoneResource {
 		return Response.noContent().build();
 	}
 	
-	@UnitOfWork
 	@DELETE
 	@Path("/villes/{id}")
 	public Response deleteVille(@PathParam(value = "id") LongParam id) {

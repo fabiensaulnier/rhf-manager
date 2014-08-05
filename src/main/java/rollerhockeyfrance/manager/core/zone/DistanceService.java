@@ -35,5 +35,15 @@ public class DistanceService {
         
         return null;
     }
+    
+    public Float[][] getMatrice(final List<ZoneVille> villes) {
+    	Float[][] matrice = null; 
+    	for (int i = 0; i < villes.size(); i++) {
+			for (int j = 0; j < villes.size(); j++) {
+				
+			}
+		}
+    	return matrice;
+    }
 
 }

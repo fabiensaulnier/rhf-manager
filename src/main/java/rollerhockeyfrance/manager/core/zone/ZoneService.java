@@ -6,7 +6,6 @@ import static com.google.common.collect.Lists.newArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import rollerhockeyfrance.manager.core.common.GoogleMapsService;
 import rollerhockeyfrance.manager.core.db.dao.zone.ZoneRepartitionDAO;
 import rollerhockeyfrance.manager.core.db.dao.zone.ZoneVilleDAO;
 import rollerhockeyfrance.manager.core.db.entity.zone.ZonePoule;
@@ -20,13 +19,10 @@ public class ZoneService {
 	private ZoneRepartitionDAO repartitionDAO;
 	private ZoneVilleDAO villeDAO;
 	
-	private GoogleMapsService googleMapsService;
-
 	@Inject
-	public ZoneService(ZoneRepartitionDAO repartitionDAO, ZoneVilleDAO villeDAO, GoogleMapsService googleMapsService) {
+	public ZoneService(ZoneRepartitionDAO repartitionDAO, ZoneVilleDAO villeDAO) {
 		this.repartitionDAO = repartitionDAO;
 		this.villeDAO = villeDAO;
-		this.googleMapsService = googleMapsService;
 	}
 	
 	/**
@@ -55,6 +51,17 @@ public class ZoneService {
 	
 	private Collection<ZonePoule> computeZone(List<ZoneVille> villes, int nbZones) {
 		Collection<ZonePoule> poules = newArrayList();
+		
+		/*
+		 * 
+		 * 
+		 * 
+		 */
+		
+		for (ZoneVille ville : villes) {
+			
+			
+		}
 		// TODO
 		return poules;
 	}

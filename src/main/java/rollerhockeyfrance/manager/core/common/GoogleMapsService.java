@@ -12,8 +12,12 @@ import com.google.code.geocoder.model.GeocoderRequest;
 import com.google.code.geocoder.model.GeocoderResult;
 import com.google.code.geocoder.model.GeocoderStatus;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class GoogleMapsService {
+	
+	private final static String PAYS = "France";
 	
 	private final Geocoder geocoder;
 	
@@ -25,8 +29,10 @@ public class GoogleMapsService {
 	public Coordonnes getCoordonnees(ZoneVille ville) {
 		
 		GeocoderRequest request = new GeocoderRequestBuilder()
-												.setAddress(ville.getLibelle() +", France")
+												.setAddress(ville.getLibelle() +", " + PAYS)
 												.getGeocoderRequest();
+		
+		
 		GeocodeResponse response = geocoder.geocode(request);
 		
 		if(GeocoderStatus.OK.equals(response.getStatus())) {

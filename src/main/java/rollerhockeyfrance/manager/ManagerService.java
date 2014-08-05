@@ -47,9 +47,10 @@ public class ManagerService extends AutoConfigService<ManagerConfiguration> {
 		// Prety-print (ressource / json)
         ObjectMapperFactory factory = environment.getObjectMapperFactory();
         factory.enable(SerializationFeature.INDENT_OUTPUT);
-		
+       
 		// Run with Guice auto config injector
 		super.runWithInjector(configuration, environment, injector);
+		
 	}
 	
 	public static void main(String[] args) throws Exception {

@@ -48,8 +48,4 @@ public class AbstractDAO<T extends AbstractEntity, PK extends Serializable> exte
                 .list();
     }
     
-    public int getCount() {
-        return 0;
-    }
-
 }

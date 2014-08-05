@@ -5,6 +5,7 @@ import com.yammer.dropwizard.db.DatabaseConfiguration;
 import com.yammer.dropwizard.hibernate.SessionFactoryFactory;
 
 import rollerhockeyfrance.manager.configuration.ManagerConfiguration;
+import rollerhockeyfrance.manager.core.db.entity.Utilisateur;
 import rollerhockeyfrance.manager.core.db.entity.zone.ZoneRepartition;
 import rollerhockeyfrance.manager.core.db.entity.zone.ZoneDistance;
 import rollerhockeyfrance.manager.core.db.entity.zone.ZonePoule;
@@ -27,7 +28,10 @@ public class HibernateBundle extends com.yammer.dropwizard.hibernate.HibernateBu
                 ZoneRepartition.class,
                 ZoneDistance.class,
                 ZonePoule.class,
-                ZoneVille.class
+                ZoneVille.class,
+                
+                
+                Utilisateur.class
                 
                 );
     }

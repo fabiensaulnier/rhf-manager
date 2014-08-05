@@ -3,17 +3,37 @@
 /* App Module */
 
 var app = angular.module('RollerHockeyManagerApp', [
-     'ngRoute',
-     'zoneControllers'
+	'ngRoute',
+  	'app.filters',
+  	'app.services',
+  	'app.directives',
+  	'app.controllers'
 ]);
+
+app.constant('managerBaseUrl', '');
 
 app.config(['$routeProvider',
      function($routeProvider) {
           $routeProvider.
           
+          		// DASHBOARD
+          		when('/', {
+          			templateUrl: 'template/dashboard/accueil.html'
+          		}).
+          		
+          		// ARBITRES
+          		
+          		
+          		// COMPETITIONS
+          		
           
+          		// DISCIPLINE
+          		when('/discipline/incidents', {
+          			templateUrl: 'template/discipline/incidents.html',
+          			controller: 'DisciplineIncidentsCtrl'
+          		}).
                
-          		// ZONES
+          	   // ZONES
                when('/zones/villes', {
                     templateUrl: 'template/zones/villes.html',
                     controller: 'ZoneVillesCtrl'
@@ -29,7 +49,7 @@ app.config(['$routeProvider',
         
                // DEFAULT
                .otherwise({
-                    redirectTo: 'index.html',
+                    redirectTo: '/',
                });
      }
 ]);
