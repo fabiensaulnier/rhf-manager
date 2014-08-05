@@ -26,6 +26,7 @@ public class ManagerModule extends AbstractModule {
 	@Override
 	protected void configure() {
 
+	    // DAO binding
 		bind(ZoneVilleDAO.class).toInstance(new ZoneVilleDAO(sessionFactory));
 		bind(UtilisateurDAO.class).toInstance(new UtilisateurDAO(sessionFactory));
 		bind(HealthCheckDAO.class).toInstance(new HealthCheckDAO(sessionFactory));

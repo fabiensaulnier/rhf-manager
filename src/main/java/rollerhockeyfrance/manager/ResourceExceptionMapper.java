@@ -12,7 +12,7 @@ import javax.ws.rs.ext.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import rollerhockeyfrance.manager.api.Error;
+import rollerhockeyfrance.manager.api.common.Error;
 
 /**
  * Classe permettant de réécrire les erreurs 
@@ -52,8 +52,8 @@ public class ResourceExceptionMapper implements ExceptionMapper<Throwable> {
      */
     protected Error getJsonError(Throwable exception) {
     	Error error = new Error();
-    	error.setCode(ID.toString());
-    	error.setMessage(exception.getLocalizedMessage());
+    	//error.setCode(ID.toString());
+    	//error.setMessage(exception.getLocalizedMessage());
     	return error;
     }
 
