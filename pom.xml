@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>rollerhockeyfrance</groupId>
+	<groupId>com.rollerhockeyfrance</groupId>
 	<artifactId>manager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -121,6 +121,11 @@
 			<artifactId>geocoder-java</artifactId>
 			<version>0.15</version>
 		</dependency>
+		<dependency>
+	       <groupId>org.jsoup</groupId>
+	       <artifactId>jsoup</artifactId>
+	       <version>1.8.1</version>
+        </dependency>
 					
 					
 		<!-- TESTS -->
