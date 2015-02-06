@@ -12,24 +12,43 @@ import javax.persistence.Table;
 
 import rollerhockeyfrance.manager.core.db.entity.AbstractEntity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-@Data
-@EqualsAndHashCode(callSuper=false)
 @Table(name="ZONE_REPARTITION")
 @Entity
 public class ZoneRepartition extends AbstractEntity {
-	
-	@Column
-	private String libelle;
-	
-	@Column
-	private String description;
-	
-	@CollectionTable(name = "ZONE_POULE_COLLECTION", joinColumns = @JoinColumn())
-	@ElementCollection(fetch = FetchType.LAZY)
-	@Column
-	private Collection<ZonePoule> poules;
+
+    @Column
+    private String libelle;
+
+    @Column
+    private String description;
+
+    @CollectionTable(name = "ZONE_POULE_COLLECTION", joinColumns = @JoinColumn())
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Column
+    private Collection<ZonePoule> poules;
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Collection<ZonePoule> getPoules() {
+        return poules;
+    }
+
+    public void setPoules(Collection<ZonePoule> poules) {
+        this.poules = poules;
+    }
 
 }

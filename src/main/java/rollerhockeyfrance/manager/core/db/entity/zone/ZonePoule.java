@@ -11,22 +11,34 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import rollerhockeyfrance.manager.core.db.entity.AbstractEntity;
 
-@Data
-@EqualsAndHashCode(callSuper=false)
 @Table(name="ZONE_POULE")
 @Entity
 public class ZonePoule extends AbstractEntity {
-	
-	@Column
-	private String libelle;
-	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@ElementCollection(fetch=FetchType.LAZY)
-    @JoinTable(name="ZONE_VILLE")
-	private Collection<ZoneVille> ville;
 
+    @Column
+    private String libelle;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ElementCollection(fetch = FetchType.LAZY)
+    @JoinTable(name = "ZONE_VILLE")
+    private Collection<ZoneVille> ville;
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public Collection<ZoneVille> getVille() {
+        return ville;
+    }
+
+    public void setVille(Collection<ZoneVille> ville) {
+        this.ville = ville;
+    }
+    
 }

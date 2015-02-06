@@ -1,12 +1,10 @@
 package rollerhockeyfrance.manager.api.common;
 
-import lombok.Data;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@Data
+
 @JsonInclude(Include.NON_NULL)
 public class Api<T> {
     
@@ -28,5 +26,37 @@ public class Api<T> {
     public enum Status {
         OK, ERROR
     }
-	
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public Error getError() {
+        return error;
+    }
+
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    public Meta getMeta() {
+        return meta;
+    }
+
+    public void setMeta(Meta meta) {
+        this.meta = meta;
+    }
+    
 }

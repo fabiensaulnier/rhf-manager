@@ -2,12 +2,9 @@ package rollerhockeyfrance.manager.api.resultat;
 
 import java.util.List;
 
-import lombok.Data;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Data
 public class Competition {
     
     /**
@@ -32,4 +29,29 @@ public class Competition {
     private boolean hasEnfants() {
         return enfants != null && enfants.size() > 0;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public List<Competition> getEnfants() {
+        return enfants;
+    }
+
+    public void setEnfants(List<Competition> enfants) {
+        this.enfants = enfants;
+    }
+    
 }

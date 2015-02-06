@@ -5,9 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
-
-import lombok.Data;
 
 import org.joda.time.DateTime;
 
@@ -21,23 +18,46 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author fabiensaulnier
  *
  */
-@Data
+
 @MappedSuperclass
 @JsonInclude(Include.NON_NULL)
 public abstract class AbstractEntity {
-	
-	@JsonProperty
-	@Id
+
+    @JsonProperty
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@JsonProperty
-	@Column
-	private DateTime created;
-	
-	@Version
-	@JsonProperty
-	@Column
-	private DateTime updated;
+    private Long id;
+
+    @JsonProperty
+    @Column
+    private DateTime created;
+
+    @JsonProperty
+    @Column
+    private DateTime updated;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public DateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(DateTime created) {
+        this.created = created;
+    }
+
+    public DateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(DateTime updated) {
+        this.updated = updated;
+    }
 
 }
