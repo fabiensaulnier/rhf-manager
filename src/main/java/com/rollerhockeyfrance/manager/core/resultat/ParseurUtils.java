@@ -26,7 +26,7 @@ import org.jsoup.select.Elements;
 public class ParseurUtils {
 	
 	// TODO : mettre dans le fichier de config yaml
-	public static int TIME_OUT = 10000; // 10s
+	public static int TIME_OUT = 20000; // 20s
 
 	// TODO : mettre dans le fichier de config yaml
 	public static String AUTHENTICITY_TOKEN = "e4752a824a152118492cbc21db2518a15599e3b7";

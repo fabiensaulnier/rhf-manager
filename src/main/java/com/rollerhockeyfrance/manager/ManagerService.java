@@ -16,16 +16,13 @@ public class ManagerService extends AutoConfigService<ManagerConfiguration> {
 
 	public ManagerService() {
 		super("manager-service", "com.rollerhockeyfrance.manager");
-		hibernateBundle = new HibernateBundle();
 	}
 	
-	private HibernateBundle hibernateBundle;
 	
 	@Override
 	public void initialize(Bootstrap<ManagerConfiguration> bootstrap) {
 		bootstrap.setName("roller-hockey-manager");
-		
-		bootstrap.addBundle(hibernateBundle);
+	
 		bootstrap.addBundle(new AssetsBundle("/html", "/app", "index.html"));
 		bootstrap.addBundle(new ExceptionBundle());
 		bootstrap.addBundle(new MigrationsBundle<ManagerConfiguration>() {
@@ -37,7 +34,7 @@ public class ManagerService extends AutoConfigService<ManagerConfiguration> {
 	
 	@Override
 	protected Injector createInjector(ManagerConfiguration configuration) {
-		return Guice.createInjector(new ManagerModule(hibernateBundle.getSessionFactory()));
+		return Guice.createInjector(new ManagerModule());
 	}
 
 	@Override
