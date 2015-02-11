@@ -21,7 +21,7 @@ public class Api<T> {
     private Error error;
     
     @JsonProperty
-    private Meta meta;
+    private Pagination meta;
 
     public enum Status {
         OK, ERROR
@@ -51,11 +51,11 @@ public class Api<T> {
         this.error = error;
     }
 
-    public Meta getMeta() {
+    public Pagination getMeta() {
         return meta;
     }
 
-    public void setMeta(Meta meta) {
+    public void setMeta(Pagination meta) {
         this.meta = meta;
     }
     

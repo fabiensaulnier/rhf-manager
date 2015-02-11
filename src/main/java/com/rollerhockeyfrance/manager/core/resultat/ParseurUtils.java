@@ -4,12 +4,17 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.jsoup.Connection.KeyVal;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
@@ -50,6 +55,54 @@ public class ParseurUtils {
 		String s = getString(td, i);
 		String n = isNullOrEmpty(s) ? "-1" : s;
 		return Integer.parseInt(n);
+	}
+	
+	public static Date getDate(Elements caption) {
+		String date = caption.text();
+		DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+		return DateTime.parse(date, dtf).toDate();
+	}
+	
+	public static Score getScore(Element td, int i) {
+		Score s = new Score();
+		Elements e = td.children().select("div > div");
+		
+		// Score
+		if(e.size() == 1) {
+			Element score = e.get(0);
+			Pattern p = Pattern.compile(".*(\\d+).*-.*(\\d+).*");
+			Matcher m = p.matcher(score.text().trim());
+			if(m.find()) {
+				s.equipeA = Integer.parseInt(m.group(1));
+				s.equipeB = Integer.parseInt(m.group(2));
+			}
+		}
+		
+		// Prolongation
+		if(e.size() == 2) {
+			s.avecProlongation = true;
+		}
+		
+		// Tab
+		if(e.size() == 3) {
+			Element tab = e.get(2);
+			Pattern p = Pattern.compile(".*(\\d+).*(\\d+).*");
+			Matcher m = p.matcher(tab.text().trim());
+			if(m.find()) {
+				s.equipeATab = Integer.parseInt(m.group(1));
+				s.equipeBTab = Integer.parseInt(m.group(2));
+			}
+		}
+		
+		return s;
+	}
+	
+	public static class Score {
+		Integer equipeA;
+		Integer equipeB;
+		Boolean avecProlongation;
+		Integer equipeATab;
+		Integer equipeBTab;
 	}
 
 }

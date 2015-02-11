@@ -29,7 +29,6 @@ import com.yammer.dropwizard.jersey.params.LongParam;
 import com.yammer.dropwizard.validation.Validated;
 import com.yammer.metrics.annotation.Timed;
 
-@Singleton
 @Path("/zone")
 @Produces(MediaType.APPLICATION_JSON)
 public class ZoneResource {

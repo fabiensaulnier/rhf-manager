@@ -5,7 +5,9 @@ import java.util.Date;
 public class Match {
 
 	private Date date;
+	private int matchId;
 	private int journeeId;
+	private String lieu;
 	private String heure;
 	private String equipeA;
 	private int equipeAId;
@@ -25,6 +27,14 @@ public class Match {
 		this.date = date;
 	}
 	
+	public int getMatchId() {
+		return matchId;
+	}
+
+	public void setMatchId(int matchId) {
+		this.matchId = matchId;
+	}
+
 	public int getJourneeId() {
 		return journeeId;
 	}
@@ -33,6 +43,14 @@ public class Match {
 		this.journeeId = journeeId;
 	}
 	
+	public String getLieu() {
+		return lieu;
+	}
+
+	public void setLieu(String lieu) {
+		this.lieu = lieu;
+	}
+
 	public String getHeure() {
 		return heure;
 	}
@@ -111,6 +129,17 @@ public class Match {
 	
 	public void setEquipeBId(int equipeBId) {
 		this.equipeBId = equipeBId;
+	}
+
+	@Override
+	public String toString() {
+		return "Match [date=" + date + ", matchId=" + matchId + ", journeeId="
+				+ journeeId + ", lieu=" + lieu + ", heure=" + heure
+				+ ", equipeA=" + equipeA + ", equipeAId=" + equipeAId
+				+ ", scoreA=" + scoreA + ", avecProlongation="
+				+ avecProlongation + ", scoreATab=" + scoreATab
+				+ ", scoreBTab=" + scoreBTab + ", scoreB=" + scoreB
+				+ ", equipeB=" + equipeB + ", equipeBId=" + equipeBId + "]";
 	}
 	
 }

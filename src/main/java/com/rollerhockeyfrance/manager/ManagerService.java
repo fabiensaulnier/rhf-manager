@@ -15,7 +15,7 @@ import com.yammer.dropwizard.migrations.MigrationsBundle;
 public class ManagerService extends AutoConfigService<ManagerConfiguration> {
 
 	public ManagerService() {
-		super("manager-service", "rollerhockeyfrance.manager");
+		super("manager-service", "com.rollerhockeyfrance.manager");
 		hibernateBundle = new HibernateBundle();
 	}
 	

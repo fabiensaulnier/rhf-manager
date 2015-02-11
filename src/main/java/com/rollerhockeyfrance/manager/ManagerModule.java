@@ -6,6 +6,7 @@ import com.google.inject.AbstractModule;
 import com.rollerhockeyfrance.manager.core.db.dao.HealthCheckDAO;
 import com.rollerhockeyfrance.manager.core.db.dao.UtilisateurDAO;
 import com.rollerhockeyfrance.manager.core.db.dao.zone.ZoneVilleDAO;
+import com.rollerhockeyfrance.manager.resources.CompetitionsResource;
 
 
 /**
@@ -29,9 +30,7 @@ public class ManagerModule extends AbstractModule {
 		bind(ZoneVilleDAO.class).toInstance(new ZoneVilleDAO(sessionFactory));
 		bind(UtilisateurDAO.class).toInstance(new UtilisateurDAO(sessionFactory));
 		bind(HealthCheckDAO.class).toInstance(new HealthCheckDAO(sessionFactory));
-		
-		
-		
+
 	}
 
 }

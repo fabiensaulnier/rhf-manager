@@ -3,35 +3,47 @@ package com.rollerhockeyfrance.manager.core.resultat;
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
 import static com.rollerhockeyfrance.manager.core.resultat.ParseurUtils.extractId;
+import static com.rollerhockeyfrance.manager.core.resultat.ParseurUtils.getDate;
 import static com.rollerhockeyfrance.manager.core.resultat.ParseurUtils.getDocument;
 import static com.rollerhockeyfrance.manager.core.resultat.ParseurUtils.getInt;
+import static com.rollerhockeyfrance.manager.core.resultat.ParseurUtils.getScore;
 import static com.rollerhockeyfrance.manager.core.resultat.ParseurUtils.getString;
-import static com.rollerhockeyfrance.manager.core.resultat.ParseurUtils.postDocument;
 import static com.rollerhockeyfrance.manager.core.resultat.UrlHelper.classementURL;
-import static com.rollerhockeyfrance.manager.core.resultat.UrlHelper.matchsURL;
 import static com.rollerhockeyfrance.manager.core.resultat.UrlHelper.statistiquesURL;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import org.jsoup.Connection.KeyVal;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
+import com.google.common.io.Files;
 import com.google.inject.Singleton;
 import com.rollerhockeyfrance.manager.api.proxy.Classement;
 import com.rollerhockeyfrance.manager.api.proxy.Match;
 import com.rollerhockeyfrance.manager.api.proxy.Statistique;
+import com.rollerhockeyfrance.manager.core.resultat.ParseurUtils.Score;
+import com.yammer.metrics.annotation.Timed;
 
+/**
+ * Parse les pages HTML du module de résultat de la FFRS pour les 
+ * transformer en objets qui serviront l'API résultats.
+ * @author fabiensaulnier
+ */
 @Singleton
 public class ParseurService {
 	
+	@Timed
 	public List<Classement> getClassement(String id) throws IOException {
 		Document doc = getDocument(classementURL(id));
 		
@@ -46,7 +58,6 @@ public class ParseurService {
 			}
 		}).transform(new Function<Element, Classement>() {
 			public Classement apply(Element e) {
-
 				Elements td = e.getElementsByTag("td");
 				String lien = td.get(1).select("a[href]").attr("href");
 				
@@ -73,6 +84,7 @@ public class ParseurService {
 		
 	}
 	
+	@Timed
 	public List<Statistique> getStatistiques(String id) throws IOException {
 		Document doc = getDocument(statistiquesURL(id));
 		
@@ -87,7 +99,6 @@ public class ParseurService {
 			}
 		}).transform(new Function<Element, Statistique>() {
 			public Statistique apply(Element e) {
-
 				Elements td = e.getElementsByTag("td");
 				String joueurLien = td.get(1).select("a[href]").attr("href");
 				String equipeLien = td.get(2).select("a[href]").attr("href");
@@ -106,19 +117,58 @@ public class ParseurService {
 		
 	}
 	
+	@Timed
 	public List<Match> getMatchs(String id, String numero, String equipe) throws IOException {
 		Collection<KeyVal> data = newHashSet();
 		data.add(org.jsoup.helper.HttpConnection.KeyVal.create("numero", "ALL"));
 		data.add(org.jsoup.helper.HttpConnection.KeyVal.create("equipe", ""));
 		
-		Document doc = postDocument(matchsURL(id), data);
+		//Document doc = postDocument(matchsURL(id), data);
+		File f = new File("/tmp/test.html");
+		String bodyHtml = Files.toString(f, Charsets.UTF_8);
+		Document doc = Jsoup.parseBodyFragment(bodyHtml);
 		
 		// Il y a autant de tableaux que de week-end de match,
 		Elements tableaux = doc.select("table.resultat");
 		
 		List<Match> result = newArrayList();
 		for (Element e : tableaux) {
-		//	Date date = 
+			final Date date = getDate(e.select("caption"));
+			Elements lignes = e.select("tr");
+			
+			result.addAll(FluentIterable.from(lignes).filter(new Predicate<Element>() {
+				public boolean apply(Element e) {
+					return e.select("th").size() == 0;
+				}
+			}).transform(new Function<Element, Match>() {
+				public Match apply(Element e) {
+					Elements td = e.getElementsByTag("td");
+					String equipeAlien = td.get(4).select("a[href]").attr("href");
+					String equipeBlien = td.get(6).select("a[href]").attr("href");
+					String matchLien = td.get(5).select("a[href]").attr("href");
+					Score s = getScore(td.get(5), 5);
+					
+					Match m = new Match();
+					m.setDate(date);
+					m.setMatchId(extractId(matchLien));
+					m.setEquipeAId(extractId(equipeAlien));
+					m.setEquipeBId(extractId(equipeBlien));
+					
+					// td.get(0) -> Cellule vides
+					m.setJourneeId(getInt(td, 1));
+					m.setHeure(getString(td, 2));
+					m.setLieu(getString(td, 3));
+					m.setEquipeA(getString(td, 4));
+					m.setScoreA(s.equipeA);
+					m.setScoreATab(s.equipeATab);
+					m.setAvecProlongation(s.avecProlongation);
+					m.setScoreB(s.equipeB);
+					m.setScoreBTab(s.equipeBTab);
+					m.setEquipeB(getString(td, 6));
+					
+					return m;
+				}
+			}).toList());
 		}
 		
 		return result;
@@ -126,10 +176,9 @@ public class ParseurService {
 	
 	public static void main(String[] args) throws IOException {
 		String competitionId = "2195"; // Ligue Elite
-		
 		ParseurService p = new ParseurService();
-		System.out.println(p.getClassement(competitionId));
-		System.out.println(p.getStatistiques(competitionId));
+		//System.out.println(p.getClassement(competitionId));
+		//System.out.println(p.getStatistiques(competitionId));
 		System.out.println(p.getMatchs(competitionId, "", ""));
 	}
 }

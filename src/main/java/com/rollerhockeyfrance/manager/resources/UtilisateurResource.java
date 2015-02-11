@@ -10,7 +10,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.rollerhockeyfrance.manager.core.common.UtilisateurService;
 
-@Singleton
 @Path("/utilisateur")
 @Produces(MediaType.APPLICATION_JSON)
 public class UtilisateurResource {
