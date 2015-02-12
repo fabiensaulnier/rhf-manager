@@ -174,6 +174,6 @@ public class ParseurService {
 		ParseurService p = new ParseurService();
 		//System.out.println(p.getClassement(competitionId));
 		//System.out.println(p.getStatistiques(competitionId));
-		System.out.println(p.getMatchs(competitionId, "", ""));
+		System.out.println(p.getMatchs(competitionId, "ALL", ""));
 	}
 }

@@ -5,132 +5,103 @@ import java.util.Date;
 public class Match {
 
 	private Date date;
-	private int matchId;
-	private int journeeId;
+	private Integer matchId;
+	private Integer journeeId;
 	private String lieu;
 	private String heure;
 	private String equipeA;
-	private int equipeAId;
-	private int scoreA;
-	private boolean avecProlongation;
-	private int scoreATab;
-	private int scoreBTab;
-	private int scoreB;
+	private Integer equipeAId;
+	private Integer scoreA;
+	private Boolean avecProlongation;
+	private Integer scoreATab;
+	private Integer scoreBTab;
+	private Integer scoreB;
 	private String equipeB;
-	private int equipeBId;
-	
+	private Integer equipeBId;
 	public Date getDate() {
 		return date;
 	}
-	
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
-	public int getMatchId() {
+	public Integer getMatchId() {
 		return matchId;
 	}
-
-	public void setMatchId(int matchId) {
+	public void setMatchId(Integer matchId) {
 		this.matchId = matchId;
 	}
-
-	public int getJourneeId() {
+	public Integer getJourneeId() {
 		return journeeId;
 	}
-	
-	public void setJourneeId(int journeeId) {
+	public void setJourneeId(Integer journeeId) {
 		this.journeeId = journeeId;
 	}
-	
 	public String getLieu() {
 		return lieu;
 	}
-
 	public void setLieu(String lieu) {
 		this.lieu = lieu;
 	}
-
 	public String getHeure() {
 		return heure;
 	}
-	
 	public void setHeure(String heure) {
 		this.heure = heure;
 	}
-	
 	public String getEquipeA() {
 		return equipeA;
 	}
-	
 	public void setEquipeA(String equipeA) {
 		this.equipeA = equipeA;
 	}
-	
-	public int getEquipeAId() {
+	public Integer getEquipeAId() {
 		return equipeAId;
 	}
-	
-	public void setEquipeAId(int equipeAId) {
+	public void setEquipeAId(Integer equipeAId) {
 		this.equipeAId = equipeAId;
 	}
-	
-	public int getScoreA() {
+	public Integer getScoreA() {
 		return scoreA;
 	}
-	
-	public void setScoreA(int scoreA) {
+	public void setScoreA(Integer scoreA) {
 		this.scoreA = scoreA;
 	}
-	
-	public boolean isAvecProlongation() {
+	public Boolean getAvecProlongation() {
 		return avecProlongation;
 	}
-	
-	public void setAvecProlongation(boolean avecProlongation) {
+	public void setAvecProlongation(Boolean avecProlongation) {
 		this.avecProlongation = avecProlongation;
 	}
-	
-	public int getScoreATab() {
+	public Integer getScoreATab() {
 		return scoreATab;
 	}
-	
-	public void setScoreATab(int scoreATab) {
+	public void setScoreATab(Integer scoreATab) {
 		this.scoreATab = scoreATab;
 	}
-	
-	public int getScoreBTab() {
+	public Integer getScoreBTab() {
 		return scoreBTab;
 	}
-	
-	public void setScoreBTab(int scoreBTab) {
+	public void setScoreBTab(Integer scoreBTab) {
 		this.scoreBTab = scoreBTab;
 	}
-	
-	public int getScoreB() {
+	public Integer getScoreB() {
 		return scoreB;
 	}
-	
-	public void setScoreB(int scoreB) {
+	public void setScoreB(Integer scoreB) {
 		this.scoreB = scoreB;
 	}
-	
 	public String getEquipeB() {
 		return equipeB;
 	}
-	
 	public void setEquipeB(String equipeB) {
 		this.equipeB = equipeB;
 	}
-	
-	public int getEquipeBId() {
+	public Integer getEquipeBId() {
 		return equipeBId;
 	}
-	
-	public void setEquipeBId(int equipeBId) {
+	public void setEquipeBId(Integer equipeBId) {
 		this.equipeBId = equipeBId;
 	}
-
 	@Override
 	public String toString() {
 		return "Match [date=" + date + ", matchId=" + matchId + ", journeeId="
@@ -141,5 +112,6 @@ public class Match {
 				+ ", scoreBTab=" + scoreBTab + ", scoreB=" + scoreB
 				+ ", equipeB=" + equipeB + ", equipeBId=" + equipeBId + "]";
 	}
+	
 	
 }
