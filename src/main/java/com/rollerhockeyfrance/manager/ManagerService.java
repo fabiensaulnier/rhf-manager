@@ -25,11 +25,7 @@ public class ManagerService extends AutoConfigService<ManagerConfiguration> {
 	
 		bootstrap.addBundle(new AssetsBundle("/html", "/app", "index.html"));
 		bootstrap.addBundle(new ExceptionBundle());
-		bootstrap.addBundle(new MigrationsBundle<ManagerConfiguration>() {
-	        public DatabaseConfiguration getDatabaseConfiguration(ManagerConfiguration configuration) {
-	            return configuration.getDatabaseConfiguration();
-	        }
-	    });
+
 	}
 	
 	@Override
