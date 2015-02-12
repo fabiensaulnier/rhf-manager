@@ -8,9 +8,7 @@ import com.rollerhockeyfrance.manager.configuration.ManagerConfiguration;
 import com.yammer.dropwizard.assets.AssetsBundle;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
-import com.yammer.dropwizard.db.DatabaseConfiguration;
 import com.yammer.dropwizard.json.ObjectMapperFactory;
-import com.yammer.dropwizard.migrations.MigrationsBundle;
 
 public class ManagerService extends AutoConfigService<ManagerConfiguration> {
 

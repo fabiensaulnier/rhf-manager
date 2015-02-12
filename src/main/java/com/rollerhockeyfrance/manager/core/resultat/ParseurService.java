@@ -8,26 +8,24 @@ import static com.rollerhockeyfrance.manager.core.resultat.ParseurUtils.getDocum
 import static com.rollerhockeyfrance.manager.core.resultat.ParseurUtils.getInt;
 import static com.rollerhockeyfrance.manager.core.resultat.ParseurUtils.getScore;
 import static com.rollerhockeyfrance.manager.core.resultat.ParseurUtils.getString;
+import static com.rollerhockeyfrance.manager.core.resultat.ParseurUtils.postDocument;
 import static com.rollerhockeyfrance.manager.core.resultat.UrlHelper.classementURL;
+import static com.rollerhockeyfrance.manager.core.resultat.UrlHelper.matchsURL;
 import static com.rollerhockeyfrance.manager.core.resultat.UrlHelper.statistiquesURL;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import org.jsoup.Connection.KeyVal;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
-import com.google.common.io.Files;
 import com.google.inject.Singleton;
 import com.rollerhockeyfrance.manager.api.proxy.Classement;
 import com.rollerhockeyfrance.manager.api.proxy.Match;
@@ -120,13 +118,10 @@ public class ParseurService {
 	@Timed
 	public List<Match> getMatchs(String id, String numero, String equipe) throws IOException {
 		Collection<KeyVal> data = newHashSet();
-		data.add(org.jsoup.helper.HttpConnection.KeyVal.create("numero", "ALL"));
-		data.add(org.jsoup.helper.HttpConnection.KeyVal.create("equipe", ""));
+		data.add(org.jsoup.helper.HttpConnection.KeyVal.create("numero", numero));
+		data.add(org.jsoup.helper.HttpConnection.KeyVal.create("equipe", equipe));
 		
-		//Document doc = postDocument(matchsURL(id), data);
-		File f = new File("/tmp/test.html");
-		String bodyHtml = Files.toString(f, Charsets.UTF_8);
-		Document doc = Jsoup.parseBodyFragment(bodyHtml);
+		Document doc = postDocument(matchsURL(id), data);
 		
 		// Il y a autant de tableaux que de week-end de match,
 		Elements tableaux = doc.select("table.resultat");
