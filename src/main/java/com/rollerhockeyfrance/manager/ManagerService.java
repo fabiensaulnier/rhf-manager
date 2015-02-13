@@ -20,10 +20,8 @@ public class ManagerService extends AutoConfigService<ManagerConfiguration> {
 	@Override
 	public void initialize(Bootstrap<ManagerConfiguration> bootstrap) {
 		bootstrap.setName("roller-hockey-manager");
-	
 		bootstrap.addBundle(new AssetsBundle("/html", "/app", "index.html"));
 		bootstrap.addBundle(new ExceptionBundle());
-
 	}
 	
 	@Override

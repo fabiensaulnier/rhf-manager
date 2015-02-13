@@ -38,22 +38,10 @@ public class ResourceExceptionMapper implements ExceptionMapper<Throwable> {
         String msg = String.format("Error handling a request: %016x", ID);
         logger.error(msg, exception);
         return Response.serverError()
-               .type(MediaType.APPLICATION_JSON)
-               .entity(this.getJsonError(exception))
+               .type(MediaType.TEXT_PLAIN)
+               .entity(exception)
                .build();
     }
    
-    /**
-     * Build JSON error
-     * 
-     * @param exception
-     * @return
-     */
-    protected Error getJsonError(Throwable exception) {
-    	Error error = new Error();
-    	//error.setCode(ID.toString());
-    	//error.setMessage(exception.getLocalizedMessage());
-    	return error;
-    }
 
 }

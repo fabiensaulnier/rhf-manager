@@ -11,8 +11,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Strings;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
+import com.google.common.cache.CacheStats;
 import com.google.common.cache.LoadingCache;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -35,6 +37,7 @@ public class EliteResource {
 	@Inject ParseurService parseur;
 	
 	LoadingCache<String, Object> cache = CacheBuilder.newBuilder()
+				.recordStats()
 		       	.build(
 		       			new CacheLoader<String, Object>() {
 							@Override
@@ -54,7 +57,7 @@ public class EliteResource {
 	@GET
 	@Path("/classement")
 	@SuppressWarnings("unchecked")
-	public  Response getClassement() {
+	public Response getClassement() {
 		List<Classement> classement;
 		 try {
 			classement = (List<Classement>) cache.get("classement");
@@ -69,7 +72,7 @@ public class EliteResource {
 	@GET
 	@Path("/statistiques")
 	@SuppressWarnings("unchecked")
-	public  Response getStatistiques() {
+	public Response getStatistiques() {
 		List<Statistique> result;
 		 try {
 			result = (List<Statistique>) cache.get("statistiques");
@@ -84,7 +87,7 @@ public class EliteResource {
 	@GET
 	@Path("/matchs")
 	@SuppressWarnings("unchecked")
-	public  Response getMatchs() {
+	public Response getMatchs() {
 		List<Match> result;
 		 try {
 			result = (List<Match>) cache.get("matchs");
@@ -96,13 +99,26 @@ public class EliteResource {
 		}
 	}
 	
-	@Timed
 	@GET
-	@Path("/refresh")
+	@Path("/cache/refresh")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response refresh(@QueryParam("key") String key) {
-		cache.refresh(key);
+		if(Strings.isNullOrEmpty("")) {
+			cache.refresh("classement");
+			cache.refresh("statistiques");
+			cache.refresh("matchs");
+		} else {
+			cache.refresh(key);
+		}
 		return Response.ok("ok").build();
+	}
+	
+	@GET
+	@Path("/cache/stat")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String cacheStat() {
+		final CacheStats cs = cache.stats();
+		return cs.toString();
 	}
 	
 }

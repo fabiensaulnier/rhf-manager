@@ -47,6 +47,7 @@
 				<version>1.6</version>
 				<configuration>
 					<createDependencyReducedPom>true</createDependencyReducedPom>
+<!-- 					<minimizeJar>true</minimizeJar> -->
 					<filters>
 						<filter>
 							<artifact>*:*</artifact>
@@ -115,6 +116,12 @@
 		    <groupId>com.fiestacabin.dropwizard.guice</groupId>
 		    <artifactId>dropwizard-guice</artifactId>
 		    <version>0.6.2</version>
+		    <exclusions>
+		    	<exclusion>
+		    		<groupId>javassist</groupId>
+  					<artifactId>javassist</artifactId>
+        		</exclusion>
+		    </exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.geocoder-java</groupId>
