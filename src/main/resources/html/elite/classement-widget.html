@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<script src="/app/assets/js/jquery-1.10.2.min.js"></script>
+		<link href="style.css" rel="stylesheet">
+	</head>
+	<body>
+		<table id="table-classement">
+			<thead>
+				<tr>
+					<td>#</td>
+					<td>Equipe</td>
+					<td>Pts</td>
+					<td>J</td>
+					<td>G</td>
+					<td>P</td>
+					<td>+/-</td>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<script>
+			$.ajax({
+				url: "/elite/classement",
+			}).done(function(data) {
+				var rows = "";
+				$.each(data, function(i) {
+					rows += '<tr class="row">';
+					rows += '<td>'+data[i].position+'</td>';
+					rows += '<td>'+data[i].nom.replace("ELITE", "")+'</td>';
+					rows += '<td>'+data[i].point+'</td>';
+					rows += '<td>'+data[i].match+'</td>';
+					rows += '<td>'+data[i].victoire+'</td>';
+					rows += '<td>'+data[i].perdu+'</td>';
+					rows += '<td>'+data[i].diff+'</td>';
+					rows += '</tr>';
+				});
+				$("tbody").append(rows);		
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+
+
+#table-classement {
+	border-collapse:collapse;
+	font: bold 10px/10px helvetica,arial,sans-serif;
+	width:280px;
+	
+	 -moz-border-radius: 5px !important;
+  border-collapse: collapse !important;
+  border: none !important;
+}
+
+#table-statistiques {
+	border-collapse:collapse;
+	font: bold 10px/10px helvetica,arial,sans-serif;
+	
+}
+
+thead  {
+ 	background: url("striped-bg.png") repeat scroll 0 0 #666;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #fff;
+    padding: 2px 5px;
+    text-shadow: 1px 1px 0 #111;
+    height: 20px;
+}
+
+tbody  {
+	padding: 2px 5px;
+	color: #ddd;
+	background: none repeat scroll 0 0 #777;
+	
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+tr {
+	height: 20px;
+	
+}
+
+td {
+	text-align: center;
+}
+
+.left {
+	text-align: left;
+}
+
+tbody > tr:hover {
+	background: #555;
+	color: #fff;
+}
+
+tr:last-child td {
+    border-bottom-left-radius: 25px;    
+    border-bottom-right-radius: 25px;   
+}
