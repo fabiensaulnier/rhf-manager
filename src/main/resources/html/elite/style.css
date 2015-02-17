@@ -5,7 +5,6 @@
 }
 
 #table-statistiques {
-	font: bold 10px/10px helvetica,arial,sans-serif;
 	
 }
 
@@ -13,16 +12,14 @@ table {
 	font: bold 10px/10px helvetica,arial,sans-serif;
     border-collapse: separate;
     border-spacing: 0;
-    border: 1px solid black;
+    border: 1px solid #777;
    	background: #777;
     border-radius: 3px;
 		-moz-box-shadow: 0 0 6px -1px #111;
 		-ms-box-shadow: 0 0 6px -1px #111;
 		-o-box-shadow: 0 0 6px -1px #111;
 		-webkit-box-shadow: 0 0 6px -1px #111;
-    
     box-shadow: 0 0 6px -1px #111;
-
 }
 
 thead  {
@@ -44,8 +41,6 @@ tbody  {
 
 tr {
 	height: 20px;
-
-	
 }
 
 td {
