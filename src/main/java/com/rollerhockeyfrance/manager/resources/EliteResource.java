@@ -10,6 +10,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.joda.time.DateTime;
+
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.cache.CacheBuilder;
@@ -20,6 +22,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.rollerhockeyfrance.manager.api.proxy.Classement;
 import com.rollerhockeyfrance.manager.api.proxy.Match;
+import com.rollerhockeyfrance.manager.api.proxy.Scorebox;
 import com.rollerhockeyfrance.manager.api.proxy.Statistique;
 import com.rollerhockeyfrance.manager.core.resultat.ParseurService;
 import com.yammer.metrics.annotation.Timed;
@@ -48,6 +51,20 @@ public class EliteResource {
 									return parseur.getStatistiques("2195");
 								} else if(Objects.equal(key, "matchs")) {
 									return parseur.getMatchs("2195", "ALL", "");
+								} else if(Objects.equal(key, "scorebox")) {
+									List<Match> m = parseur.getMatchs("2195", "ALL", "");
+									
+									Scorebox sb = new Scorebox();
+									DateTime t = DateTime.now().plusDays(2);									
+									for (Match match : m) {
+										boolean isNext = t.isBefore(match.getDate().getTime());
+										if(isNext) {
+											sb.getNext().add(match);
+										} else {
+											sb.getLast().add(match);
+										}
+									}
+									return sb;
 								}
 								return null;
 							}
@@ -99,6 +116,20 @@ public class EliteResource {
 		}
 	}
 	
+	@Timed
+	@GET
+	@Path("/scorebox")
+	public Response getScorebox() {		
+		 try {
+			Scorebox result = (Scorebox) cache.get("scorebox");
+			return Response.ok(result).build();
+		} catch (ExecutionException e) {
+			cache.invalidate("scorebox");
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
+	}
+	
 	@GET
 	@Path("/cache/refresh")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -107,6 +138,7 @@ public class EliteResource {
 			cache.refresh("classement");
 			cache.refresh("statistiques");
 			cache.refresh("matchs");
+			cache.refresh("scorebox");
 		} else {
 			cache.refresh(key);
 		}
