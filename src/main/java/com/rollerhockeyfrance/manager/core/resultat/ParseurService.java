@@ -169,11 +169,4 @@ public class ParseurService {
 		return result;
 	}
 	
-	public static void main(String[] args) throws IOException {
-		String competitionId = "2195"; // Ligue Elite
-		ParseurService p = new ParseurService();
-		//System.out.println(p.getClassement(competitionId));
-		//System.out.println(p.getStatistiques(competitionId));
-		System.out.println(p.getMatchs(competitionId, "ALL", ""));
-	}
 }
