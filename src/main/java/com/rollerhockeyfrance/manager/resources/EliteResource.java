@@ -3,6 +3,7 @@ package com.rollerhockeyfrance.manager.resources;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -12,6 +13,7 @@ import javax.ws.rs.core.Response;
 
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.cache.CacheBuilder;
@@ -119,11 +121,17 @@ public class EliteResource {
 	@Timed
 	@GET
 	@Path("/scorebox")
-	public Response getScorebox() {		
+	@Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, "application/x-javascript; charset=UTF-8"})
+	public Response getScorebox(@QueryParam("jsonp") boolean jsonp, @DefaultValue("callback") @QueryParam("callback") String callback) {		
 		 try {
 			Scorebox result = (Scorebox) cache.get("scorebox");
-			return Response.ok(result).build();
-		} catch (ExecutionException e) {
+			if(jsonp) {
+				JSONPObject json = new JSONPObject(callback, result);
+				return Response.ok(json).build();
+			} else {
+				return Response.ok(result).build();
+			}
+		} catch (Exception e) {
 			cache.invalidate("scorebox");
 			e.printStackTrace();
 			return Response.serverError().build();
