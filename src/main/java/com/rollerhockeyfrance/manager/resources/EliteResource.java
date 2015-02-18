@@ -11,8 +11,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
@@ -54,18 +52,11 @@ public class EliteResource {
 								} else if(Objects.equal(key, "matchs")) {
 									return parseur.getMatchs("2195", "ALL", "");
 								} else if(Objects.equal(key, "scorebox")) {
-									List<Match> m = parseur.getMatchs("2195", "ALL", "");
-									
+									List<Match> last = parseur.getMatchs("2195", "LAST", "");
+									List<Match> next = parseur.getMatchs("2195", "NEXT", "");
 									Scorebox sb = new Scorebox();
-									DateTime t = DateTime.now().plusDays(2);									
-									for (Match match : m) {
-										boolean isNext = t.isBefore(match.getDate().getTime());
-										if(isNext) {
-											sb.getNext().add(match);
-										} else {
-											sb.getLast().add(match);
-										}
-									}
+									sb.setLast(last);
+									sb.setNext(next);
 									return sb;
 								}
 								return null;
