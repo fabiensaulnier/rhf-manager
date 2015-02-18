@@ -47,7 +47,6 @@
 				<version>1.6</version>
 				<configuration>
 					<createDependencyReducedPom>true</createDependencyReducedPom>
-<!-- 					<minimizeJar>true</minimizeJar> -->
 					<filters>
 						<filter>
 							<artifact>*:*</artifact>
@@ -124,16 +123,10 @@
 		    </exclusions>
 		</dependency>
 		<dependency>
-			<groupId>com.google.code.geocoder-java</groupId>
-			<artifactId>geocoder-java</artifactId>
-			<version>0.15</version>
-		</dependency>
-		<dependency>
 	       <groupId>org.jsoup</groupId>
 	       <artifactId>jsoup</artifactId>
 	       <version>1.8.1</version>
         </dependency>
-					
 					
 		<!-- TESTS -->
 		<dependency>
