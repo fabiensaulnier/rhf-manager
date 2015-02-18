@@ -22,10 +22,10 @@ import com.google.common.cache.CacheStats;
 import com.google.common.cache.LoadingCache;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.rollerhockeyfrance.manager.api.proxy.Classement;
-import com.rollerhockeyfrance.manager.api.proxy.Match;
-import com.rollerhockeyfrance.manager.api.proxy.Scorebox;
-import com.rollerhockeyfrance.manager.api.proxy.Statistique;
+import com.rollerhockeyfrance.manager.api.Classement;
+import com.rollerhockeyfrance.manager.api.Match;
+import com.rollerhockeyfrance.manager.api.Scorebox;
+import com.rollerhockeyfrance.manager.api.Statistique;
 import com.rollerhockeyfrance.manager.core.resultat.ParseurService;
 import com.yammer.metrics.annotation.Timed;
 

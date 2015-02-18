@@ -1,4 +1,4 @@
-package com.rollerhockeyfrance.manager.api.proxy;
+package com.rollerhockeyfrance.manager.api;
 
 import java.util.Date;
 

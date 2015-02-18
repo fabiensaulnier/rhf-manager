@@ -27,9 +27,9 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.inject.Singleton;
-import com.rollerhockeyfrance.manager.api.proxy.Classement;
-import com.rollerhockeyfrance.manager.api.proxy.Match;
-import com.rollerhockeyfrance.manager.api.proxy.Statistique;
+import com.rollerhockeyfrance.manager.api.Classement;
+import com.rollerhockeyfrance.manager.api.Match;
+import com.rollerhockeyfrance.manager.api.Statistique;
 import com.rollerhockeyfrance.manager.core.resultat.ParseurUtils.Score;
 import com.yammer.metrics.annotation.Timed;
 
