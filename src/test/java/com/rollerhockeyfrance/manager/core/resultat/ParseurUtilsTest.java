@@ -16,6 +16,10 @@ public class ParseurUtilsTest extends TestCase {
 		actual = ParseurUtils.extractId("file:///stats/match/feuille_match/1755");
 		assertEquals(expected, actual);
 		
+		actual = ParseurUtils.extractId("/match/pdf/1755.pdf");
+		assertEquals(expected, actual);
+		
+		
 	}
 
 }

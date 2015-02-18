@@ -140,7 +140,7 @@ public class ParseurService {
 					Elements td = e.getElementsByTag("td");
 					String equipeAlien = td.get(4).select("a[href]").attr("href");
 					String equipeBlien = td.get(6).select("a[href]").attr("href");
-					String matchLien = td.get(5).select("a[href]").attr("href");
+					String matchLien = td.get(7).select("a[href]").attr("href");
 					Score s = getScore(td.get(5), 5);
 					
 					Match m = new Match();
