@@ -18,6 +18,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.CacheStats;
 import com.google.common.cache.LoadingCache;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.rollerhockeyfrance.manager.api.Classement;
@@ -55,7 +56,7 @@ public class EliteResource {
 									List<Match> last = parseur.getMatchs("2195", "LAST", "");
 									List<Match> next = parseur.getMatchs("2195", "NEXT", "");
 									Scorebox sb = new Scorebox();
-									sb.setLast(last);
+									sb.setLast(Lists.reverse(last));
 									sb.setNext(next);
 									return sb;
 								}
