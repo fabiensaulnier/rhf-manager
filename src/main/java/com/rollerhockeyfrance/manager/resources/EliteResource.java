@@ -30,7 +30,7 @@ import com.yammer.metrics.annotation.Timed;
 
 /**
  * Resource très bourine temporaire pour avoir déjà quelque chose qui fonctionne
- * pour l'Elite.
+ * pour le site LigueElite.fr
  * @author fabiensaulnier
  */
 @Singleton
@@ -46,6 +46,7 @@ public class EliteResource {
 		       			new CacheLoader<String, Object>() {
 							@Override
 							public Object load(String key) throws Exception {
+								// Key > Objet
 								if(Objects.equal(key, "classement")) {
 									return parseur.getClassement("2195");
 								} else if(Objects.equal(key, "statistiques")) {
