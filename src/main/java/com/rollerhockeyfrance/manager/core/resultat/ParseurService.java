@@ -123,7 +123,7 @@ public class ParseurService {
 		
 		Document doc = postDocument(matchsURL(id), data);
 		
-		// Il y a autant de tableaux que de week-end de match,
+		// Il y a autant de tableaux que de week-end de match
 		Elements tableaux = doc.select("table.resultat");
 		
 		List<Match> result = newArrayList();
@@ -149,7 +149,7 @@ public class ParseurService {
 					m.setEquipeAId(extractId(equipeAlien));
 					m.setEquipeBId(extractId(equipeBlien));
 					
-					// td.get(0) -> Cellule vides
+					// td.get(0) -> Cellule vide
 					m.setJourneeId(getInt(td, 1));
 					m.setHeure(getString(td, 2));
 					m.setLieu(getString(td, 3));

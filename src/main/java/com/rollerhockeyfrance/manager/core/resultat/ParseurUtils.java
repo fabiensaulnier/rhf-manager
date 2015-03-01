@@ -70,7 +70,7 @@ public class ParseurUtils {
 		// Score
 		if(e.size() >= 1) {
 			Element score = e.get(0);
-			Pattern p = Pattern.compile(".*(\\d+).*-.*(\\d+).*");
+			Pattern p = Pattern.compile(".*(\\d+) - (\\d+).*");
 			Matcher m = p.matcher(score.text().trim());
 			if(m.find()) {
 				s.equipeA = Integer.parseInt(m.group(1));
