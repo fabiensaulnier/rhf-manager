@@ -168,11 +168,5 @@ public class ParseurService {
 		
 		return result;
 	}
-	
-	public static void main(String[] args) throws IOException {
 		
-		ParseurService p = new ParseurService();
-		p.getMatchs("2195", "14", "1756");
-	}
-	
 }
