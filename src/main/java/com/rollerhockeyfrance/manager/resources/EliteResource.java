@@ -37,6 +37,8 @@ import com.yammer.metrics.annotation.Timed;
 @Path("/elite")
 @Produces(MediaType.APPLICATION_JSON)
 public class EliteResource {
+	
+	private static final String LIGUE_ELITE_ID = "2605";
 
 	@Inject ParseurService parseur;
 	
@@ -48,14 +50,14 @@ public class EliteResource {
 							public Object load(String key) throws Exception {
 								// Key > Objet
 								if(Objects.equal(key, "classement")) {
-									return parseur.getClassement("2195");
+									return parseur.getClassement("2605");
 								} else if(Objects.equal(key, "statistiques")) {
-									return parseur.getStatistiques("2195");
+									return parseur.getStatistiques(LIGUE_ELITE_ID);
 								} else if(Objects.equal(key, "matchs")) {
-									return parseur.getMatchs("2195", "ALL", "");
+									return parseur.getMatchs(LIGUE_ELITE_ID, "ALL", "");
 								} else if(Objects.equal(key, "scorebox")) {
-									List<Match> last = parseur.getMatchs("2195", "LAST", "");
-									List<Match> next = parseur.getMatchs("2195", "NEXT", "");
+									List<Match> last = parseur.getMatchs(LIGUE_ELITE_ID, "LAST", "");
+									List<Match> next = parseur.getMatchs(LIGUE_ELITE_ID, "NEXT", "");
 									Scorebox sb = new Scorebox();
 									sb.setLast(Lists.reverse(last));
 									sb.setNext(next);
