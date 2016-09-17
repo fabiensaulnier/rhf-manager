@@ -38,7 +38,7 @@ import com.yammer.metrics.annotation.Timed;
 @Produces(MediaType.APPLICATION_JSON)
 public class EliteResource {
 	
-	private static final String LIGUE_ELITE_ID = "2605";
+	private static final String LIGUE_ELITE_ID = "3100";
 
 	@Inject ParseurService parseur;
 	

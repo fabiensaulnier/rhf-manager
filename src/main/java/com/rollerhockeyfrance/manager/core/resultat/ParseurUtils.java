@@ -97,6 +97,7 @@ public class ParseurUtils {
 		return s;
 	}
 	
+	// TODO : déplacer dans l'API
 	public static class Score {
 		Integer equipeA;
 		Integer equipeB;

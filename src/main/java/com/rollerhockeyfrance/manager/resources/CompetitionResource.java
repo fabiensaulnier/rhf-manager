@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.rollerhockeyfrance.manager.api.Classement;
+import com.rollerhockeyfrance.manager.api.Competition;
 import com.rollerhockeyfrance.manager.api.Match;
 import com.rollerhockeyfrance.manager.api.Scorebox;
 import com.rollerhockeyfrance.manager.api.Statistique;
@@ -97,7 +98,6 @@ public class CompetitionResource {
 			classement = (List<Classement>) cache.get(new CacheKey(CacheType.CLASSEMENT, id.get().toString()));
 			return Response.ok(classement).build();
 		} catch (ExecutionException e) {
-			e.printStackTrace();
 			return Response.serverError().build();
 		}
 	}
@@ -108,11 +108,13 @@ public class CompetitionResource {
 	@SuppressWarnings("unchecked")
 	public Response getStatistiques(@PathParam("id") LongParam id) {
 		List<Statistique> result;
+		CacheKey key = new CacheKey(CacheType.STATISTIQUE, id.get().toString());
 		 try {
-			result = (List<Statistique>) cache.get(new CacheKey(CacheType.STATISTIQUE, id.get().toString()));
+			result = (List<Statistique>) cache.get(key);
 			return Response.ok(result).build();
 		} catch (ExecutionException e) {
 			e.printStackTrace();
+			cache.invalidate(key);
 			return Response.serverError().build();
 		}
 	}
@@ -127,8 +129,8 @@ public class CompetitionResource {
 			result = (List<Match>) cache.get(new CacheKey(CacheType.MATCHS, id.get().toString()));
 			return Response.ok(result).build();
 		} catch (ExecutionException e) {
-			cache.invalidate("matchs");
 			e.printStackTrace();
+			cache.invalidate(CacheType.MATCHS);
 			return Response.serverError().build();
 		}
 	}
@@ -148,8 +150,36 @@ public class CompetitionResource {
 				return Response.ok(result).build();
 			}
 		} catch (Exception e) {
-			cache.invalidate("scorebox");
 			e.printStackTrace();
+			cache.invalidate(CacheType.SCORE_BOX);
+			return Response.serverError().build();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Timed
+	@GET
+	@Path("/all")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, "application/x-javascript; charset=UTF-8"})
+	public Response getAll(@PathParam("id") LongParam id, @QueryParam("jsonp") boolean jsonp,
+			@DefaultValue("callback") @QueryParam("callback") String callback) {	
+		 try {
+			List<Classement> classement = (List<Classement>) cache.get(new CacheKey(CacheType.CLASSEMENT, id.get().toString()));
+			List<Statistique> statistiques = (List<Statistique>) cache.get(new CacheKey(CacheType.STATISTIQUE, id.get().toString()));
+			List<Match> matchs = (List<Match>) cache.get(new CacheKey(CacheType.MATCHS, id.get().toString()));
+			
+			Competition competition = new Competition();
+			competition.setClassement(classement);
+			competition.setStatistiques(statistiques);
+			competition.setMatchs(matchs);
+			
+			if(jsonp) {
+				JSONPObject json = new JSONPObject(callback, competition);
+				return Response.ok(json).build();
+			} else {
+				return Response.ok(competition).build();
+			}
+		} catch (Exception e) {
 			return Response.serverError().build();
 		}
 	}
