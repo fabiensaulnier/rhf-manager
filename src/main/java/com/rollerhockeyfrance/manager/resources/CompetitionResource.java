@@ -86,6 +86,40 @@ public class CompetitionResource {
 			this.t = t; 
 			this.id = id;
 		}
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + getOuterType().hashCode();
+			result = prime * result + ((id == null) ? 0 : id.hashCode());
+			result = prime * result + ((t == null) ? 0 : t.hashCode());
+			return result;
+		}
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			CacheKey other = (CacheKey) obj;
+			if (!getOuterType().equals(other.getOuterType()))
+				return false;
+			if (id == null) {
+				if (other.id != null)
+					return false;
+			} else if (!id.equals(other.id))
+				return false;
+			if (t != other.t)
+				return false;
+			return true;
+		}
+		private CompetitionResource getOuterType() {
+			return CompetitionResource.this;
+		}
+		
+		
 	}
 	
 	@Timed
@@ -98,6 +132,7 @@ public class CompetitionResource {
 			classement = (List<Classement>) cache.get(new CacheKey(CacheType.CLASSEMENT, id.get().toString()));
 			return Response.ok(classement).build();
 		} catch (ExecutionException e) {
+			System.out.println(e);
 			return Response.serverError().build();
 		}
 	}
