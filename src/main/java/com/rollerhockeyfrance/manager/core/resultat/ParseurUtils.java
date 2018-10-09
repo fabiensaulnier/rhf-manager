@@ -26,7 +26,7 @@ import org.jsoup.select.Elements;
 public class ParseurUtils {
 	
 	// TODO : mettre dans le fichier de config yaml
-	public static int TIME_OUT = 10000; // 10s
+	public static int TIME_OUT = 20000; // 20s
 
 	// TODO : mettre dans le fichier de config yaml
 	public static String AUTHENTICITY_TOKEN = "e4752a824a152118492cbc21db2518a15599e3b7";
@@ -68,9 +68,9 @@ public class ParseurUtils {
 		Elements e = td.children().select("div > div");
 		
 		// Score
-		if(e.size() == 1) {
+		if(e.size() >= 1) {
 			Element score = e.get(0);
-			Pattern p = Pattern.compile(".*(\\d+).*-.*(\\d+).*");
+			Pattern p = Pattern.compile(".*(\\d+) - (\\d+).*");
 			Matcher m = p.matcher(score.text().trim());
 			if(m.find()) {
 				s.equipeA = Integer.parseInt(m.group(1));
@@ -97,6 +97,7 @@ public class ParseurUtils {
 		return s;
 	}
 	
+	// TODO : déplacer dans l'API
 	public static class Score {
 		Integer equipeA;
 		Integer equipeB;

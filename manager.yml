@@ -1,40 +1,20 @@
-contact: fabien.saulnier@gmail.com
+# use the simple server factory if you only want to run on a single port
+# HEROKU NOTE - the port gets be overridden with the Heroku $PORT in the Procfile
+# HTTP-specific options.
+http:
+  # The port on which the HTTP server listens for service requests.
+  port: 8080
+  # The port on which the HTTP server listens for administrative requests.
+  adminPort: 8080
 
+logging:
 
-database:
-  # the name of your JDBC driver
-  driverClass: org.postgresql.Driver
+  # ...
+  # Settings for logging to stdout.
+  console:
 
-  # the username
-  user: postgres
+    # If true, write log statements to stdout.
+    enabled: true
 
-  # the password
-  password: postgres
-
-  # the JDBC URL
-  url: jdbc:postgresql://localhost:5433/rhf_manager
-
-  # any properties specific to your JDBC driver:
-  properties:
-    charSet: UTF-8
-
-  # the maximum amount of time to wait on an empty pool before throwing an exception
-  maxWaitForConnection: 1s
-
-  # the SQL query to run when validating a connection's liveness
-  validationQuery: "/* MyService Health Check */ SELECT 1"
-
-  # the minimum number of connections to keep open
-  minSize: 8
-
-  # the maximum number of connections to keep open
-  maxSize: 32
-
-  # whether or not idle connections should be validated
-  checkConnectionWhileIdle: false
-
-  # how long a connection must be held before it can be validated
-  checkConnectionHealthWhenIdleFor: 10s
-
-  # the maximum lifetime of an idle connection
-  closeConnectionIfIdleFor: 1 minute
+    # Do not display log statements below this threshold to stdout.
+    threshold: ALL

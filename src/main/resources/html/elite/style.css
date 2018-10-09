@@ -1,0 +1,56 @@
+
+
+#table-classement {
+	width: 280px;
+}
+
+#table-statistiques {
+	
+}
+
+table {
+	font: bold 10px/10px helvetica,arial,sans-serif;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #777;
+   	background: #777;
+    border-radius: 3px;
+		-moz-box-shadow: 0 0 6px -1px #111;
+		-ms-box-shadow: 0 0 6px -1px #111;
+		-o-box-shadow: 0 0 6px -1px #111;
+		-webkit-box-shadow: 0 0 6px -1px #111;
+    box-shadow: 0 0 6px -1px #111;
+}
+
+thead  {
+	background: #666 url(striped-bg.png);
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	color: #fff;
+	font: bold 10px/10px helvetica, arial, sans-serif;
+	margin-bottom: 2px;
+	padding: 2px 5px;
+	text-shadow: 1px 1px 0 #111;
+}
+
+tbody  {
+	padding: 2px 5px;
+	color: #ddd;
+	background: none repeat scroll 0 0 #777;
+}
+
+tr {
+	height: 20px;
+}
+
+td {
+	text-align: center;
+}
+
+.left {
+	text-align: left;
+}
+
+tbody > tr:hover {
+	color: #fff;
+}
