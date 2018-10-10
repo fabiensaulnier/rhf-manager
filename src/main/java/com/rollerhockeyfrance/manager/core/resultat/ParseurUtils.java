@@ -50,6 +50,11 @@ public class ParseurUtils {
 	public static String getString(Elements td, int i) {
 		return td.get(i).text();
 	}
+	
+	public static String getString(Elements td, int i, String defaultIfEmpty) {
+		String s = getString(td, i);
+		return isNullOrEmpty(s) ? defaultIfEmpty : s;
+	}
 
 	public static int getInt(Elements td, int i) {
 		String s = getString(td, i);

@@ -61,7 +61,7 @@ public class ParseurService {
 				
 				Classement c = new Classement();
 				c.setEquipeId(extractId(lien));
-				c.setPosition(getString(td, 0));
+				c.setPosition(getString(td, 0, "-"));
 				c.setNom(getString(td, 1));
 				c.setPoint(getInt(td, 2));
 				c.setMatch(getInt(td, 3));
