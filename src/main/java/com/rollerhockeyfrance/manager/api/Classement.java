@@ -3,7 +3,7 @@ package com.rollerhockeyfrance.manager.api;
 public class Classement {
 	
 	private int equipeId;
-	private int position;
+	private String position;
 	private String nom;
 	private int point;
 	private int match;
@@ -26,11 +26,11 @@ public class Classement {
 		this.equipeId = equipeId;
 	}
 	
-	public int getPosition() {
+	public String getPosition() {
 		return position;
 	}
 	
-	public void setPosition(int position) {
+	public void setPosition(String position) {
 		this.position = position;
 	}
 	
